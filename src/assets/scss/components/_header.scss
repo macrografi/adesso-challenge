@@ -1,0 +1,21 @@
+.navbar {
+  ul {
+    margin: 10px 0;
+    padding: 0;
+    display: flex;
+    li {
+      list-style-type: none;
+      margin: 0 0 0 15px;
+      a {
+        color: #fff;
+        text-decoration: none;
+        -webkit-transition: color 0.2s;
+        transition: color 0.2s;
+        &:hover {
+          color: #b99258;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

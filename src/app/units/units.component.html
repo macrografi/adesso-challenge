@@ -1,0 +1,181 @@
+<app-header></app-header>
+<main class="container">
+  <nav class="my-5" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/" href="#">Home</a></li>
+      <li class="breadcrumb-item active">Units</li>
+    </ol>
+  </nav>
+  <div class="h-100 p-5 bg-light border rounded-3">
+    <h2 class="mb-4">Ages</h2>
+    <div class="btn-group" role="group">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="selectAge($event)"
+        [ngClass]="this.selectedAge == 'All' ? 'active' : ''"
+      >
+        All
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="selectAge($event)"
+        [ngClass]="this.selectedAge == 'Dark' ? 'active' : ''"
+      >
+        Dark
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="selectAge($event)"
+        [ngClass]="this.selectedAge == 'Feudal' ? 'active' : ''"
+      >
+        Feudal
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="selectAge($event)"
+        [ngClass]="this.selectedAge == 'Castle' ? 'active' : ''"
+      >
+        Castle
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="selectAge($event)"
+        [ngClass]="this.selectedAge == 'Imperial' ? 'active' : ''"
+      >
+        Imperial
+      </button>
+    </div>
+  </div>
+  <div class="h-100 p-5 bg-light border rounded-3 cost-filter my-4">
+    <h2>Cost</h2>
+    <ul>
+      <!--Wood Check-->
+      <li>
+        <div class="custom-checkbox">
+          <input
+            type="checkbox"
+            name="wood"
+            id="wood"
+            value="wood"
+            (change)="checkValue($event)"
+          />
+          <label for="wood"></label>
+          <span>Wood</span>
+          <input
+            class="slider"
+            type="range"
+            min="0"
+            max="200"
+            value="0"
+            name="wood"
+            [disabled]="!woodIsChecked"
+            (change)="rangeChanged($event)"
+            [(ngModel)]="woodCost"
+          />
+          <div class="badge bg-dark rounded-pill">{{ woodCost }} - 200</div>
+        </div>
+      </li>
+      <!--Food Check-->
+      <li>
+        <div class="custom-checkbox">
+          <input
+            type="checkbox"
+            name="food"
+            id="food"
+            value="food"
+            (change)="checkValue($event)"
+          />
+          <label for="food"></label>
+          <span>Food</span>
+          <input
+            class="slider"
+            type="range"
+            min="0"
+            max="200"
+            value="0"
+            name="food"
+            [disabled]="!foodIsChecked"
+            (change)="rangeChanged($event)"
+            [(ngModel)]="foodCost"
+          />
+          <div class="badge bg-dark rounded-pill">{{ foodCost }} - 200</div>
+        </div>
+      </li>
+      <!--Gold Check-->
+      <li>
+        <div class="custom-checkbox">
+          <input
+            type="checkbox"
+            name="gold"
+            id="gold"
+            value="gold"
+            (change)="checkValue($event)"
+          />
+          <label for="gold"></label>
+          <span>Gold</span>
+          <input
+            class="slider"
+            type="range"
+            min="0"
+            max="200"
+            value="0"
+            name="gold"
+            [disabled]="!goldIsChecked"
+            (change)="rangeChanged($event)"
+            [(ngModel)]="goldCost"
+          />
+          <div class="badge bg-dark rounded-pill">{{ goldCost }} - 200</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="unitLists">
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle units-table table-hover">
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th class="text-center" scope="col">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let item of unitLists"
+            (click)="unitDetail('/unit-detail', item.id)"
+          >
+            <th class="text-center" scope="col">{{ item.id }}</th>
+            <td>{{ item.name }}</td>
+            <td>{{ item.age }}</td>
+            <td>
+              <div class="cost">
+                <div
+                  class="cost-repeater"
+                  *ngFor="let cost of item.cost | keyvalue"
+                >
+                  <span>{{ cost.key }} : {{ cost.value }} <i> , </i></span>
+                </div>
+                <div
+                  class="cost-repeater"
+                  *ngIf="(item.cost | keyvalue) === null"
+                >
+                  <span>
+                    -
+                  </span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

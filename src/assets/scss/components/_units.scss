@@ -1,0 +1,143 @@
+.breadcrumb {
+  a {
+    color: #212529;
+  }
+}
+
+.cost-filter {
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      list-style-type: none;
+      padding: 5px 0;
+      label {
+        cursor: pointer;
+        span {
+          padding: 0 0 0 4px;
+        }
+      }
+      .form-range {
+        width: 185px;
+      }
+      .badge {
+        width: 85px;
+        font-size: 14px;
+        margin: 0 0 0 10px;
+      }
+      .slider {
+        -webkit-appearance: none;
+        height: 4px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+        &:disabled {
+          opacity: 0.2;
+          cursor: default;
+        }
+      }
+      .slider:hover {
+        opacity: 0.7;
+        &:disabled {
+          opacity: 0.2;
+          cursor: default;
+        }
+      }
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        background: #212529;
+        border: none;
+      }
+
+      .slider::-moz-range-thumb {
+        background: #212529;
+        border: none;
+      }
+    }
+  }
+}
+
+.units-table {
+  th,
+  td {
+    .cost {
+      display: flex;
+      justify-content: center;
+      .cost-repeater:last-child {
+        span {
+          i {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  tr {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.unit-detail-table {
+  .id-column {
+    width: 200px;
+  }
+}
+
+.custom-checkbox {
+  position: relative;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  span {
+    width: 50px;
+    margin: 0 0 0 10px;
+  }
+}
+
+.custom-checkbox label {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  background: #212529;
+  border-radius: 4px;
+}
+
+.custom-checkbox label:after {
+  content: "";
+  width: 11px;
+  height: 6px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.custom-checkbox label:hover::after {
+  opacity: 0.3;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+.label-text {
+  position: relative;
+  left: 10px;
+}

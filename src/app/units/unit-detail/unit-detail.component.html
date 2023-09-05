@@ -1,0 +1,99 @@
+<app-header></app-header>
+<main class="container">
+  <nav class="my-5" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/" href="#">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/units" href="#">Units</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Unit Detail</li>
+    </ol>
+  </nav>
+  <div class="table-responsive">
+    <table *ngIf="unitItem" class="table table-bordered align-middle unit-detail-table">
+      <tbody>
+        <tr>
+          <th class="id-column">Id</th>
+          <td colspan="3">
+            <span>{{ unitItem.id }}</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <td colspan="3">
+            <span>{{ unitItem.name }}</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td colspan="3">
+            <span>{{ unitItem.description }}</span>
+            <span *ngIf="!unitItem.description">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Min.Required Age</th>
+          <td colspan="3">
+            <span>{{ unitItem.age }}</span>
+            <span *ngIf="!unitItem.age">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Wood Cost</th>
+          <td colspan="3">
+            <span>{{ unitItem.wood }}</span>
+            <span *ngIf="!unitItem.wood">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Food Cost</th>
+          <td colspan="3">
+            <span> {{ unitItem.food }}</span>
+            <span *ngIf="!unitItem.food">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Gold Cost</th>
+          <td colspan="3">
+            <span> {{ unitItem.gold }}</span>
+            <span *ngIf="!unitItem.gold">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Build Time</th>
+          <td colspan="3">
+            <span>{{ unitItem.build_time }}</span>
+            <span *ngIf="!unitItem.build_time">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Reload Time</th>
+          <td colspan="3">
+            <span>{{ unitItem.reload_time }}</span>
+            <span *ngIf="!unitItem.reload_time">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Hit Points</th>
+          <td colspan="3">
+            <span>{{ unitItem.hit_points }}</span>
+            <span *ngIf="!unitItem.hit_points">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Attack</th>
+          <td colspan="3">
+            <span>{{ unitItem.attack }}</span>
+            <span *ngIf="!unitItem.attack">-</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Accuracy</th>
+          <td colspan="3">
+            <span>{{ unitItem.accuracy }}</span>
+            <span *ngIf="!unitItem.accuracy">-</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<app-footer></app-footer>

@@ -1,0 +1,10 @@
+footer {
+  a {
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+    &:hover {
+      color: #b99258 !important;
+      text-decoration: underline;
+    }
+  }
+}
