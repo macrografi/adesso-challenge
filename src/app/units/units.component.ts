@@ -33,10 +33,11 @@ export class UnitsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getInitialList();
-    this.useFilter();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.ageFilter();
+  }
 
   getInitialList() {
     return this.store.dispatch(new getUnitsAction());
@@ -44,7 +45,7 @@ export class UnitsComponent implements OnInit, AfterViewInit {
 
   selectAge(e: any): void {
     this.selectedAge = e.target.innerText;
-    this.useFilter();
+    this.ageFilter();
   }
 
   triggerCost(param: any): void {
@@ -66,21 +67,21 @@ export class UnitsComponent implements OnInit, AfterViewInit {
         this.goldCost = 0;
       }
     }
-    this.useFilter();
+    this.costFilter();
   }
 
   setRange(param: any): void {
     if (param.name == 'wood') {
       this.woodCost = param.value;
-      this.useFilter();
+      this.costFilter();
     }
     if (param.name == 'food') {
       this.foodCost = param.value;
-      this.useFilter();
+      this.costFilter();
     }
     if (param.name == 'gold') {
       this.goldCost = param.value;
-      this.useFilter();
+      this.costFilter();
     }
   }
 
@@ -97,9 +98,9 @@ export class UnitsComponent implements OnInit, AfterViewInit {
     this.router.navigate([detailUrl]).then(r => {});
   }
 
-  useFilter() {
+  ageFilter() {
     if (this.selectedAge === 'All') {
-      this.units$.subscribe(res => {
+      this.units$?.subscribe(res => {
         this.unitLists = res;
       });
     } else {
@@ -113,54 +114,64 @@ export class UnitsComponent implements OnInit, AfterViewInit {
           this.unitLists = res;
         });
     }
-
+  }
+  costFilter(): void {
     // Wood range filter
-    const woodRange = this.units$
-      ?.pipe(
-        map(result =>
-          result.filter((res: { age: string }) => res.age == this.selectedAge)
-        ),
-        map(result =>
-          result.filter(
-            (res: { cost: { Wood: number } }) => res.cost?.Wood >= this.woodCost
+    if (this.woodIsChecked) {
+      const woodRange = this.units$
+        ?.pipe(
+          map(result =>
+            result.filter((res: { age: string }) => res.age == this.selectedAge)
+          ),
+          map(result =>
+            result.filter(
+              (res: { cost: { Wood: number } }) =>
+                res.cost?.Wood >= this.woodCost
+            )
           )
         )
-      )
-      .subscribe(res => {
-        this.woodList = res;
-      });
+        .subscribe(res => {
+          this.woodList = res;
+        });
+    }
 
     // Food range filter
-    const foodRange = this.units$
-      ?.pipe(
-        map(result =>
-          result.filter((res: { age: string }) => res.age == this.selectedAge)
-        ),
-        map(result =>
-          result.filter(
-            (res: { cost: { Food: number } }) => res.cost?.Food >= this.foodCost
+    if (this.foodIsChecked) {
+      const foodRange = this.units$
+        ?.pipe(
+          map(result =>
+            result.filter((res: { age: string }) => res.age == this.selectedAge)
+          ),
+          map(result =>
+            result.filter(
+              (res: { cost: { Food: number } }) =>
+                res.cost?.Food >= this.foodCost
+            )
           )
         )
-      )
-      .subscribe(res => {
-        this.foodList = res;
-      });
+        .subscribe(res => {
+          this.foodList = res;
+        });
+    }
 
     // Gold range filter
-    const goldRange = this.units$
-      ?.pipe(
-        map(result =>
-          result.filter((res: { age: string }) => res.age == this.selectedAge)
-        ),
-        map(result =>
-          result.filter(
-            (res: { cost: { Good: number } }) => res.cost?.Good >= this.goldCost
+    if (this.goldIsChecked) {
+      const goldRange = this.units$
+        ?.pipe(
+          map(result =>
+            result.filter((res: { age: string }) => res.age == this.selectedAge)
+          ),
+          map(result =>
+            result.filter(
+              (res: { cost: { Good: number } }) =>
+                res.cost?.Good >= this.goldCost
+            )
           )
         )
-      )
-      .subscribe(res => {
-        this.goldList = res;
-      });
+        .subscribe(res => {
+          this.goldList = res;
+        });
+    }
 
     const woodFilteredStream$ = of(this.woodList);
     const foodFilteredStream$ = of(this.foodList);
