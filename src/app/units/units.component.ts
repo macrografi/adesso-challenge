@@ -171,8 +171,8 @@ export class UnitsComponent implements OnInit, AfterViewInit {
           ),
           map(result =>
             result.filter(
-              (res: { cost: { Good: number } }) =>
-                res.cost?.Good >= this.goldCost
+              (res: { cost: { Gold: number } }) =>
+                res.cost?.Gold >= this.goldCost
             )
           )
         )
