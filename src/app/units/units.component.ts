@@ -55,21 +55,26 @@ export class UnitsComponent implements OnInit, AfterViewInit {
       this.woodIsChecked = param.checked;
       if (!this.woodIsChecked) {
         this.woodCost = 0;
+        this.woodList = [];
       }
+      this.costFilter();
     }
     if (param.value == 'food') {
       this.foodIsChecked = param.checked;
       if (!this.foodIsChecked) {
         this.foodCost = 0;
+        this.foodList = [];
       }
+      this.costFilter();
     }
     if (param.value == 'gold') {
       this.goldIsChecked = param.checked;
       if (!this.foodIsChecked) {
         this.goldCost = 0;
+        this.goldList = [];
       }
+      this.costFilter();
     }
-    this.costFilter();
 
     // if unchecked all checkbox reset filter.
     if (!this.woodIsChecked && !this.foodIsChecked && !this.goldIsChecked) {
