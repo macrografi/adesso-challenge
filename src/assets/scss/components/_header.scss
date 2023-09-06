@@ -16,8 +16,9 @@
       list-style-type: none;
       margin: 0 0 0 15px;
       a {
-        color: #fff;
+        color: #f3cc86;
         text-decoration: none;
+        text-shadow: 1px 0px #000;
         -webkit-transition: color 0.2s;
         transition: color 0.2s;
         &:hover {
