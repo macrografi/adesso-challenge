@@ -33,11 +33,10 @@ export class UnitsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getInitialList();
-  }
-
-  ngAfterViewInit(): void {
     this.ageFilter();
   }
+
+  ngAfterViewInit(): void {}
 
   getInitialList() {
     return this.store.dispatch(new getUnitsAction());
