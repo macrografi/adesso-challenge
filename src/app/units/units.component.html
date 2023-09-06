@@ -67,6 +67,7 @@
             id="wood"
             value="wood"
             (change)="checkValue($event)"
+            [checked]="woodIsChecked"
           />
           <label for="wood"></label>
           <span>Wood</span>
@@ -93,6 +94,7 @@
             id="food"
             value="food"
             (change)="checkValue($event)"
+            [checked]="foodIsChecked"
           />
           <label for="food"></label>
           <span>Food</span>
@@ -119,6 +121,7 @@
             id="gold"
             value="gold"
             (change)="checkValue($event)"
+            [checked]="goldIsChecked"
           />
           <label for="gold"></label>
           <span>Gold</span>

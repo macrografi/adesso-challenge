@@ -113,6 +113,15 @@ export class UnitsComponent implements OnInit, AfterViewInit {
           this.unitLists = res;
         });
     }
+    this.resetCostFilter();
+  }
+  resetCostFilter(): void {
+    this.woodIsChecked = false;
+    this.foodIsChecked = false;
+    this.goldIsChecked = false;
+    this.woodCost = 0;
+    this.foodCost = 0;
+    this.goldCost = 0;
   }
   costFilter(): void {
     // Wood range filter
