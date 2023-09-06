@@ -30,13 +30,16 @@ export class UnitsComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private store: Store) {}
 
   @Select(UnitsState.getUnitsList) units$!: Observable<any>;
+  noData = false;
 
   ngOnInit(): void {
     this.getInitialList();
     this.ageFilter();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.checkData();
+  }
 
   getInitialList() {
     return this.store.dispatch(new getUnitsAction());
@@ -67,6 +70,21 @@ export class UnitsComponent implements OnInit, AfterViewInit {
       }
     }
     this.costFilter();
+
+    // if unchecked all checkbox reset filter.
+    if (!this.woodIsChecked && !this.foodIsChecked && !this.goldIsChecked) {
+      this.ageFilter();
+    }
+    this.checkData();
+  }
+
+  resetCostFilter(): void {
+    this.woodIsChecked = false;
+    this.foodIsChecked = false;
+    this.goldIsChecked = false;
+    this.woodCost = 0;
+    this.foodCost = 0;
+    this.goldCost = 0;
   }
 
   setRange(param: any): void {
@@ -82,6 +100,7 @@ export class UnitsComponent implements OnInit, AfterViewInit {
       this.goldCost = param.value;
       this.costFilter();
     }
+    this.checkData();
   }
 
   checkValue(event: any): void {
@@ -113,16 +132,10 @@ export class UnitsComponent implements OnInit, AfterViewInit {
           this.unitLists = res;
         });
     }
+    this.checkData();
     this.resetCostFilter();
   }
-  resetCostFilter(): void {
-    this.woodIsChecked = false;
-    this.foodIsChecked = false;
-    this.goldIsChecked = false;
-    this.woodCost = 0;
-    this.foodCost = 0;
-    this.goldCost = 0;
-  }
+
   costFilter(): void {
     // Wood range filter
     if (this.woodIsChecked) {
@@ -181,6 +194,7 @@ export class UnitsComponent implements OnInit, AfterViewInit {
         });
     }
 
+    // Combine all streams
     const woodFilteredStream$ = of(this.woodList);
     const foodFilteredStream$ = of(this.foodList);
     const goldFilteredStream$ = of(this.goldList);
@@ -190,5 +204,11 @@ export class UnitsComponent implements OnInit, AfterViewInit {
       .subscribe(r => {
         this.unitLists = r;
       });
+  }
+
+  checkData(): void {
+    setTimeout(() => {
+      this.noData = this.unitLists.length === 0;
+    }, 500);
   }
 }
