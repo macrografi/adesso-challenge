@@ -1,0 +1,21 @@
+main {
+  &.banner-image {
+    .banner-holder {
+      width: 100%;
+      min-height: 500px;
+      -webkit-border-radius: 1rem;
+      -moz-border-radius: 1rem;
+      border-radius: 1rem;
+      border: none;
+      background: url("/assets/images/age-of-empires-category-banner_3024x.jpg")
+        no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    @media only screen and (max-width: 600px) {
+      .banner-holder {
+        min-height: 300px;
+      }
+    }
+  }
+}

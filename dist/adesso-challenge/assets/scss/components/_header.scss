@@ -1,0 +1,74 @@
+.navbar {
+  .logo {
+    width: 215px;
+    height: 50px;
+    background-size: cover;
+    background: url("/assets/images/Age-Of-Empires-Logo-PNG-Picture.png")
+      no-repeat;
+    background-position: center center;
+    background-size: 215px;
+    cursor: pointer;
+    .age-of-animation-box {
+      padding: 16px 24px;
+      position: relative;
+      opacity: 0.4;
+
+      &::after {
+        position: absolute;
+        content: "";
+        top: 15px;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        transform: scale(0.9) translateZ(0);
+        filter: blur(15px);
+        background: linear-gradient(
+          to left,
+          #ff5770,
+          #e4428d,
+          #c42da8,
+          #9e16c3,
+          #6501de,
+          #9e16c3,
+          #c42da8,
+          #e4428d,
+          #ff5770
+        );
+        background-size: 200% 200%;
+        animation: animateGlow 2s linear infinite;
+      }
+    }
+  }
+  ul {
+    margin: 10px 0;
+    padding: 0;
+    display: flex;
+    li {
+      list-style-type: none;
+      margin: 0 0 0 15px;
+      a {
+        color: #f3cc86;
+        text-decoration: none;
+        text-shadow: 1px 0px #000;
+        -webkit-transition: color 0.2s;
+        transition: color 0.2s;
+        font-style: italic;
+        &:hover {
+          color: #b99258;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
