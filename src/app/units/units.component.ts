@@ -144,62 +144,122 @@ export class UnitsComponent implements OnInit, AfterViewInit {
   costFilter(): void {
     // Wood range filter
     if (this.woodIsChecked) {
-      const woodRange = this.units$
-        ?.pipe(
-          map(result =>
-            result.filter((res: { age: string }) => res.age == this.selectedAge)
-          ),
-          map(result =>
-            result.filter(
-              (res: { cost: { Wood: number } }) =>
-                res.cost?.Wood >= this.woodCost
+      if (this.selectedAge == 'All') {
+        //not selected age sorting mapping
+        const woodRange = this.units$
+          ?.pipe(
+            map(result =>
+              result.filter(
+                (res: { cost: { Wood: number } }) =>
+                  res.cost?.Wood >= this.woodCost
+              )
             )
           )
-        )
-        .subscribe(res => {
-          this.woodList = res;
-        });
+          .subscribe(res => {
+            this.woodList = res;
+          });
+      }
+      //has selected age sorting mapping
+      else {
+        const woodRange = this.units$
+          ?.pipe(
+            map(result =>
+              result.filter(
+                (res: { age: string }) => res.age == this.selectedAge
+              )
+            ),
+            map(result =>
+              result.filter(
+                (res: { cost: { Wood: number } }) =>
+                  res.cost?.Wood >= this.woodCost
+              )
+            )
+          )
+          .subscribe(res => {
+            this.woodList = res;
+          });
+      }
     }
 
     // Food range filter
     if (this.foodIsChecked) {
-      const foodRange = this.units$
-        ?.pipe(
-          map(result =>
-            result.filter((res: { age: string }) => res.age == this.selectedAge)
-          ),
-          map(result =>
-            result.filter(
-              (res: { cost: { Food: number } }) =>
-                res.cost?.Food >= this.foodCost
+      //not selected age sorting mapping
+      if (this.selectedAge == 'All') {
+        const foodRange = this.units$
+          ?.pipe(
+            map(result =>
+              result.filter(
+                (res: { cost: { Food: number } }) =>
+                  res.cost?.Food >= this.foodCost
+              )
             )
           )
-        )
-        .subscribe(res => {
-          this.foodList = res;
-        });
+          .subscribe(res => {
+            this.foodList = res;
+          });
+      }
+      //has selected age sorting mapping
+      else {
+        const foodRange = this.units$
+          ?.pipe(
+            map(result =>
+              result.filter(
+                (res: { age: string }) => res.age == this.selectedAge
+              )
+            ),
+            map(result =>
+              result.filter(
+                (res: { cost: { Food: number } }) =>
+                  res.cost?.Food >= this.foodCost
+              )
+            )
+          )
+          .subscribe(res => {
+            this.foodList = res;
+          });
+      }
     }
 
     // Gold range filter
     if (this.goldIsChecked) {
-      const goldRange = this.units$
-        ?.pipe(
-          map(result =>
-            result.filter((res: { age: string }) => res.age == this.selectedAge)
-          ),
-          map(result =>
-            result.filter(
-              (res: { cost: { Gold: number } }) =>
-                res.cost?.Gold >= this.goldCost
+      //not selected age sorting mapping
+      if (this.selectedAge == 'All') {
+        const goldRange = this.units$
+          ?.pipe(
+            map(result =>
+              result.filter(
+                (res: { cost: { Gold: number } }) =>
+                  res.cost?.Gold >= this.goldCost
+              )
             )
           )
-        )
-        .subscribe(res => {
-          this.goldList = res;
-        });
+          .subscribe(res => {
+            this.goldList = res;
+          });
+      }
+      //has selected age sorting mapping
+      else {
+        const goldRange = this.units$
+          ?.pipe(
+            map(result =>
+              result.filter(
+                (res: { age: string }) => res.age == this.selectedAge
+              )
+            ),
+            map(result =>
+              result.filter(
+                (res: { cost: { Gold: number } }) =>
+                  res.cost?.Gold >= this.goldCost
+              )
+            )
+          )
+          .subscribe(res => {
+            this.goldList = res;
+          });
+      }
     }
 
-    // Combine all streams
+    // Combine all streams width forkJoin
     const woodFilteredStream$ = of(this.woodList);
     const foodFilteredStream$ = of(this.foodList);
     const goldFilteredStream$ = of(this.goldList);
