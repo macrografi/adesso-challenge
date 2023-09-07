@@ -61,6 +61,12 @@
 }
 
 .units-table {
+  .units-first-column {
+    width: 100px;
+  }
+  .units-age-column{
+      width: 200px;
+  }
   th,
   td {
     .cost {

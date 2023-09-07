@@ -28,7 +28,6 @@ export class UnitDetailComponent implements OnInit {
       )
       .subscribe(res => {
         res.map((value: any) => {
-          console.log('value : ', value);
           this.unitItem = {
             id: value.id,
             name: value.name,
