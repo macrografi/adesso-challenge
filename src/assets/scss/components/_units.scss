@@ -26,7 +26,8 @@
         margin: 0 0 0 10px;
       }
       .slider {
-        -webkit-appearance: auto;
+        -webkit-appearance: none;
+        width: 200px;
         height: 4px;
         background: #d3d3d3;
         outline: none;
@@ -45,16 +46,23 @@
           cursor: default;
         }
       }
+
       .slider::-webkit-slider-thumb {
-        -webkit-appearance: auto;
+        width: 15px;
+        height: 15px;
+        -webkit-appearance: none;
         appearance: none;
         background: #212529;
         border: none;
+        border-radius: 50%;
       }
 
       .slider::-moz-range-thumb {
-        background: #212529;
+        width: 15px;
+        height: 15px;
+        background: #212529 !important;
         border: none;
+        border-radius: 50%;
       }
     }
   }
@@ -64,8 +72,8 @@
   .units-first-column {
     width: 100px;
   }
-  .units-age-column{
-      width: 200px;
+  .units-age-column {
+    width: 200px;
   }
   th,
   td {
