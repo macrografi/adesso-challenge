@@ -142,10 +142,12 @@ export class UnitsComponent implements OnInit, AfterViewInit {
   }
 
   costFilter(): void {
-    // Wood range filter
-    if (this.woodIsChecked) {
-      if (this.selectedAge == 'All') {
-        //not selected age sorting mapping
+    this.woodList = [];
+    this.foodList = [];
+    this.goldList = [];
+    //
+    if (this.selectedAge == 'All') {
+      if (this.woodIsChecked) {
         const woodRange = this.units$
           ?.pipe(
             map(result =>
@@ -159,32 +161,7 @@ export class UnitsComponent implements OnInit, AfterViewInit {
             this.woodList = res;
           });
       }
-      //has selected age sorting mapping
-      else {
-        const woodRange = this.units$
-          ?.pipe(
-            map(result =>
-              result.filter(
-                (res: { age: string }) => res.age == this.selectedAge
-              )
-            ),
-            map(result =>
-              result.filter(
-                (res: { cost: { Wood: number } }) =>
-                  res.cost?.Wood >= this.woodCost
-              )
-            )
-          )
-          .subscribe(res => {
-            this.woodList = res;
-          });
-      }
-    }
-
-    // Food range filter
-    if (this.foodIsChecked) {
-      //not selected age sorting mapping
-      if (this.selectedAge == 'All') {
+      if (this.foodIsChecked) {
         const foodRange = this.units$
           ?.pipe(
             map(result =>
@@ -198,32 +175,7 @@ export class UnitsComponent implements OnInit, AfterViewInit {
             this.foodList = res;
           });
       }
-      //has selected age sorting mapping
-      else {
-        const foodRange = this.units$
-          ?.pipe(
-            map(result =>
-              result.filter(
-                (res: { age: string }) => res.age == this.selectedAge
-              )
-            ),
-            map(result =>
-              result.filter(
-                (res: { cost: { Food: number } }) =>
-                  res.cost?.Food >= this.foodCost
-              )
-            )
-          )
-          .subscribe(res => {
-            this.foodList = res;
-          });
-      }
-    }
-
-    // Gold range filter
-    if (this.goldIsChecked) {
-      //not selected age sorting mapping
-      if (this.selectedAge == 'All') {
+      if (this.goldIsChecked) {
         const goldRange = this.units$
           ?.pipe(
             map(result =>
@@ -237,8 +189,48 @@ export class UnitsComponent implements OnInit, AfterViewInit {
             this.goldList = res;
           });
       }
-      //has selected age sorting mapping
-      else {
+    }
+    //
+    else {
+      if (this.woodIsChecked) {
+        const woodRange = this.units$
+          ?.pipe(
+            map(result =>
+              result.filter(
+                (res: { age: string }) => res.age == this.selectedAge
+              )
+            ),
+            map(result =>
+              result.filter(
+                (res: { cost: { Wood: number } }) =>
+                  res.cost?.Wood >= this.woodCost
+              )
+            )
+          )
+          .subscribe(res => {
+            this.woodList = res;
+          });
+      }
+      if (this.foodIsChecked) {
+        const foodRange = this.units$
+          ?.pipe(
+            map(result =>
+              result.filter(
+                (res: { age: string }) => res.age == this.selectedAge
+              )
+            ),
+            map(result =>
+              result.filter(
+                (res: { cost: { Food: number } }) =>
+                  res.cost?.Food >= this.foodCost
+              )
+            )
+          )
+          .subscribe(res => {
+            this.foodList = res;
+          });
+      }
+      if (this.goldIsChecked) {
         const goldRange = this.units$
           ?.pipe(
             map(result =>
