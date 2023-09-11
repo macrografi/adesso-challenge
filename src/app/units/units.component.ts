@@ -1,7 +1,17 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { UnitsState } from '../state/units.state';
-import { filter, forkJoin, map, Observable, of } from 'rxjs';
+import {
+  distinct,
+  filter,
+  forkJoin,
+  from,
+  map,
+  Observable,
+  of,
+  tap,
+  toArray
+} from 'rxjs';
 import { getUnitsAction } from '../action/units-action';
 import { Router } from '@angular/router';
 
@@ -257,10 +267,20 @@ export class UnitsComponent implements OnInit, AfterViewInit {
     const goldFilteredStream$ = of(this.goldList);
 
     forkJoin([woodFilteredStream$, foodFilteredStream$, goldFilteredStream$])
-      .pipe(map(([s1, s2, s3]) => [...s1, ...s2, ...s3]))
-      .subscribe(r => {
-        this.unitLists = r;
-      });
+      .pipe(
+        map(([s1, s2, s3]) => [...s1, ...s2, ...s3]),
+        tap(r => {
+          from(r)
+            .pipe(
+              distinct(({ id }) => id),
+              toArray()
+            )
+            .subscribe(r => {
+              this.unitLists = r;
+            });
+        })
+      )
+      .subscribe();
   }
 
   checkData(): void {
